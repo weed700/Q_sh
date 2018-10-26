@@ -194,6 +194,6 @@ cd $stat_log_dir
 echo "10. Backup & Update git"
 
 cd /root/Q_sh/
-git add .
+git add --all
 git commit -m "hoon"
 git push
