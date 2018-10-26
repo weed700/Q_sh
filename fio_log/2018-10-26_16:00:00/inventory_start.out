@@ -184,7 +184,7 @@ Number of Namespaces:               1
 Namespace 1 Size/Capacity:          1,000,204,886,016 [1.00 TB]
 Namespace 1 Formatted LBA Size:     4096
 Namespace 1 IEEE EUI-64:            5cd2e4 874f270100
-Local Time is:                      Fri Oct 26 15:44:15 2018 KST
+Local Time is:                      Fri Oct 26 16:00:01 2018 KST
 Firmware Updates (0x02):            1 Slot
 Optional Admin Commands (0x0006):   Format Frmw_DL
 Optional NVM Commands (0x0006):     Wr_Unc DS_Mngmt
@@ -212,7 +212,7 @@ Available Spare Threshold:          10%
 Percentage Used:                    0%
 Data Units Read:                    23,766,545 [12.1 TB]
 Data Units Written:                 19,848,551 [10.1 TB]
-Host Read Commands:                 1,303,405,825
+Host Read Commands:                 1,303,405,855
 Host Write Commands:                1,291,624,487
 Controller Busy Time:               378
 Power Cycles:                       64
@@ -243,7 +243,7 @@ Number of Namespaces:               1
 Namespace 1 Size/Capacity:          1,000,204,886,016 [1.00 TB]
 Namespace 1 Formatted LBA Size:     4096
 Namespace 1 IEEE EUI-64:            5cd2e4 844e270100
-Local Time is:                      Fri Oct 26 15:44:15 2018 KST
+Local Time is:                      Fri Oct 26 16:00:01 2018 KST
 Firmware Updates (0x02):            1 Slot
 Optional Admin Commands (0x0006):   Format Frmw_DL
 Optional NVM Commands (0x0006):     Wr_Unc DS_Mngmt
@@ -271,7 +271,7 @@ Available Spare Threshold:          10%
 Percentage Used:                    0%
 Data Units Read:                    5,054,004 [2.58 TB]
 Data Units Written:                 10,643,761 [5.44 TB]
-Host Read Commands:                 91,053,535
+Host Read Commands:                 91,053,551
 Host Write Commands:                227,893,457
 Controller Busy Time:               159
 Power Cycles:                       70
@@ -302,7 +302,7 @@ Number of Namespaces:               1
 Namespace 1 Size/Capacity:          1,000,204,886,016 [1.00 TB]
 Namespace 1 Formatted LBA Size:     512
 Namespace 1 IEEE EUI-64:            5cd2e4 944e270100
-Local Time is:                      Fri Oct 26 15:44:15 2018 KST
+Local Time is:                      Fri Oct 26 16:00:01 2018 KST
 Firmware Updates (0x02):            1 Slot
 Optional Admin Commands (0x0006):   Format Frmw_DL
 Optional NVM Commands (0x0006):     Wr_Unc DS_Mngmt
@@ -324,15 +324,15 @@ SMART overall-health self-assessment test result: PASSED
 
 SMART/Health Information (NVMe Log 0x02, NSID 0xffffffff)
 Critical Warning:                   0x00
-Temperature:                        41 Celsius
+Temperature:                        40 Celsius
 Available Spare:                    100%
 Available Spare Threshold:          10%
 Percentage Used:                    0%
-Data Units Read:                    4,756,940 [2.43 TB]
-Data Units Written:                 4,700,895 [2.40 TB]
-Host Read Commands:                 114,123,738
-Host Write Commands:                147,929,162
-Controller Busy Time:               41
+Data Units Read:                    4,766,725 [2.44 TB]
+Data Units Written:                 4,711,316 [2.41 TB]
+Host Read Commands:                 115,346,317
+Host Write Commands:                149,234,764
+Controller Busy Time:               42
 Power Cycles:                       69
 Power On Hours:                     1,760
 Unsafe Shutdowns:                   51
@@ -361,7 +361,7 @@ Number of Namespaces:               1
 Namespace 1 Size/Capacity:          1,000,204,886,016 [1.00 TB]
 Namespace 1 Formatted LBA Size:     512
 Namespace 1 IEEE EUI-64:            5cd2e4 b802270100
-Local Time is:                      Fri Oct 26 15:44:15 2018 KST
+Local Time is:                      Fri Oct 26 16:00:01 2018 KST
 Firmware Updates (0x02):            1 Slot
 Optional Admin Commands (0x0006):   Format Frmw_DL
 Optional NVM Commands (0x0006):     Wr_Unc DS_Mngmt
@@ -383,14 +383,14 @@ SMART overall-health self-assessment test result: PASSED
 
 SMART/Health Information (NVMe Log 0x02, NSID 0xffffffff)
 Critical Warning:                   0x00
-Temperature:                        37 Celsius
+Temperature:                        36 Celsius
 Available Spare:                    100%
 Available Spare Threshold:          10%
 Percentage Used:                    0%
-Data Units Read:                    7,785,229 [3.98 TB]
-Data Units Written:                 3,051,176 [1.56 TB]
-Host Read Commands:                 283,980,976
-Host Write Commands:                148,063,082
+Data Units Read:                    7,794,741 [3.99 TB]
+Data Units Written:                 3,061,597 [1.56 TB]
+Host Read Commands:                 285,169,783
+Host Write Commands:                149,368,684
 Controller Busy Time:               41
 Power Cycles:                       69
 Power On Hours:                     1,760
