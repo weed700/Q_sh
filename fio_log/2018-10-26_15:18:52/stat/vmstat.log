@@ -1,3 +1,0 @@
-procs -----------memory---------- ---swap-- -----io---- -system-- ------cpu----- -----timestamp-----
- r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st                 KST
- 0  0      0 14015196   2272 1075352    0    0   581   313   12   30  0  0 99  0  0 2018-10-26 15:18:53

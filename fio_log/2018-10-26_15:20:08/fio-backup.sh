@@ -143,7 +143,8 @@ echo "Start!!"
 sleep 2
 
 ## running fio
-/root/Q_sh/fio/fio mixed.ini
+cd /root/Q_sh/fio
+./fio mixed.ini
 
 echo "8. Get system monitoring logs."
 		
