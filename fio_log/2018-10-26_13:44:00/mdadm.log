@@ -1,0 +1,33 @@
+====================host=================
++++++++++++++++++++++/dev/md1++++++++++++++++++
+/dev/md1:
+           Version : 1.2
+     Creation Time : Fri Oct 26 12:56:14 2018
+        Raid Level : raid1
+        Array Size : 976629440 (931.39 GiB 1000.07 GB)
+     Used Dev Size : 976629440 (931.39 GiB 1000.07 GB)
+      Raid Devices : 2
+     Total Devices : 2
+       Persistence : Superblock is persistent
+
+     Intent Bitmap : Internal
+
+       Update Time : Fri Oct 26 13:44:01 2018
+             State : clean, resyncing 
+    Active Devices : 2
+   Working Devices : 2
+    Failed Devices : 0
+     Spare Devices : 0
+
+Consistency Policy : bitmap
+
+     Resync Status : 56% complete
+
+              Name : nvme-storage:1  (local to host nvme-storage)
+              UUID : 55171675:8019406c:666e0662:1c11fbb4
+            Events : 515
+
+    Number   Major   Minor   RaidDevice State
+       0     259        5        0      active sync   /dev/nvme2n1p1
+       1     259        4        1      active sync   /dev/nvme3n1p1
++++++++++++++++++++++/etc/mdadm.conf++++++++++++++++++
