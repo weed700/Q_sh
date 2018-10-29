@@ -128,8 +128,8 @@ echo "6. Start monitoring system."
 /root/Q_sh/fio_script/kill.sh vmstat
 /root/Q_sh/fio_script/kill.sh iostat
 rm -rf /tmp/*stat.log
-vmstat -t 10 > /tmp/vmstat.log &
-iostat -mtx 10 > /tmp/iostat.log &
+vmstat -t 1 > /tmp/vmstat.log &
+iostat -mtx 1 > /tmp/iostat.log &
 
 echo "7. Start FIO Test."
 sleep 1
