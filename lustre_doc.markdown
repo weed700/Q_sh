@@ -100,11 +100,11 @@ main:       "/assets/[maincover image] "
   * 다음은 일반 스트라이핑 구성과 오버스트라이핑을 구성하는 명령어입니다.
 ```console
 //Client에서 실행
-# lfs setstripe --stripe-count 4 [filename] //OST가 4개일 때 4개의 스트라이프
-# lfs setstripe --overstripe-count 8 [filename] //OST가 4개일 때 8개의 스트라이프
+# lfs setstripe --stripe-count 4 [file or directory name] //OST가 4개일 때 4개의 스트라이프
+# lfs setstripe --overstripe-count 8 [file or directory name] //OST가 4개일 때 8개의 스트라이프
 
 //stripe 구성 확인
-# lfs getstripe [filename]
+# lfs getstripe [file or directory name]
 ```
 
 * DOM(Data-ON-MDT)
