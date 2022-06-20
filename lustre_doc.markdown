@@ -92,6 +92,14 @@ main:       "/assets/[maincover image] "
 
 ![OVERSTRIPING](/assets/overstriping.png)
 <center>그림 4. overstriping</center>
-&nbsp;
 
-  * 
+오버스트라이핑(overstriping)은 기존에 `OST`당 하나였던 `stripe`를 여러개의 `stripe`를 가질 수 있게 만든것 입니다. 기본적으로 스트라이프의 크기는 1M(1048576byte)로 되어있습니다.
+
+일반적으로 러스터에서는 스트라이프를 구성하기 전 순차적으로 `OST`에 저장되는것을 확인할 수 있습니다. `stripe`를 구성 후 에는 각 `OST`마다 동등하게 분배되어 파일이 저장되는것을 확인할 수 있습니다. 오버스트라이핑 같은 경우 일반 스트라이핑으로 구성한 것 보다 빠르다는 장점이 있습니다.
+
+  * 다음은 일반 스트라이핑 구성과 오버스트라이핑을 구성하는 명령어입니다.
+```console
+//Client에서 실행
+# lfs setstripe --stripe-count 4 [filename] //OST가 4개일 때 4개의 스트라이프를 만듬
+# lfs setstripe --overstripe-count 8 [filename] //OST가 4개일 떄 8개의 스트라이프를 만듬
+```
