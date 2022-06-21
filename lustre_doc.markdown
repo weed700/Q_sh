@@ -11,6 +11,8 @@ main:       "/assets/[maincover image] "
 
 # Lustre File System 소개
 
+High Performance Computing(HPC) 클러스터는 대규모 애플리케이션에 컴퓨팅 성능을 제공하기 위해 생성됩니다. 이렇듯 많은양의 데이터를 처리해야할 경우가 많습니다. 꽤 오랜 시간 동안 프로세서와 메모리의 속도는 급격히 증가했지만 I/O 시스템의 성능은 이보다 뒤쳐지고 있습니다. 따라서 상대적으로 성능이 떨어지는 I/O 성능은 클러스터의 전체 성능을 저하 시킬 수 있습니다. 이를 위해  `lustre File System`을 사용합니다.
+ 
 `러스터(Lustre)`는 병렬 분산 파일 시스템으로 주로 고성능 컴퓨팅의 대용량 파일 시스템으로 사용되고 있습니다. 
 `러스터(Lustre)`의 이름은 `Linux`와 `Cluster`의 혼성어에서 유래됐습니다. 
 
@@ -50,8 +52,9 @@ main:       "/assets/[maincover image] "
 
 # Lustre FS 특징 및 기능
 
-* HSM(Hierarchical Storage Management)
-  * `HSM`은 고가의 저장매체와 저가의 저장매체 간의 데이터를 자동으로 이동하는 데이터 저장 기술입니다.
+## HSM(Hierarchical Storage Management)
+
+`HSM`은 고가의 저장매체와 저가의 저장매체 간의 데이터를 자동으로 이동하는 데이터 저장 기술입니다.
 
 `HSM`을 사용하면 다음과 같은 이점이 있습니다. 회사에서는 새 장비에 투자하지 않고도 이미 보유하고 있는 리소스를 최대한 활용할 수 있습니다. 또한, 가장 중요한 데이터의 운선 순위를 저장하여 고속 저장 장치의 공간을 확보합니다. 고속 저장 장치 보다 저속 저장 장치의 비용이 훨씬 저렴하기 때문에 스토리지 비용을 절감할 수 있습니다. 이는 기업에서 비용이 증가할 수 있는 대량의 데이터를 관리하는 경우에 특히 경제적입니다.
 
@@ -73,12 +76,10 @@ main:       "/assets/[maincover image] "
   * remove : `HSM` 솔루션에서 데이터 사본을 삭제합니다.
   * cancel : 진행 중이거나 보류 중인 요청을 삭제합니다.
 
-* PCC(Persistent Client Cache)
-
+## PCC(Persistent Client Cache)
 
 ![pcc](/assets/pcc.png)
 <center>그림 3. pcc</center>
-
 
 `PCC`는 러스터 클라이언트 측에서 로컬 캐시 그룹을 제공하는 프레임워크입니다. 각 클라이언트는 `OST`대신 로컬 저장 장치를 자체 캐시로 사용합니다. 로컬 파일 시스템은 로컬 저장장치 안에 있는 캐시 데이터를 관리하는데 사용됩니다. 캐시된 I/O의 경우 로컬 파일 시스템으로 전달되어 처리되고 일반 I/O는 OST로 전달됩니다.
 
@@ -88,7 +89,8 @@ main:       "/assets/[maincover image] "
  
 클라이언트에서 로컬 저장장치를 캐시로 이용하게 되면 네트워크 지연이 없고 다른 클라이언트에 대한 오버헤드가 없습니다. 또한, 로컬 저장장치를 I/O 속도가 빠른 `SSD` or `NVMe SSD`를 통해 좋은 성능을 낼 수 있습니다. `SSD`는 모든 종류의 `SSD`를 캐시 장치로 이용할 수 있습니다. `PCC`를 통해 작거나 임의의 I/O를 `OST`로 저장할 필요 없이 로컬 캐시 장치에 저장하여 사용하면 `OST`의 부담을 줄일 수 장점이 있습니다.
 
-* OverStriping
+
+## OverStriping
 
 ![OVERSTRIPING](/assets/overstriping.png)
 <center>그림 4. overstriping</center>
@@ -97,14 +99,83 @@ main:       "/assets/[maincover image] "
 
 일반적으로 러스터에서는 스트라이프를 구성하기 전 순차적으로 `OST`에 저장되는것을 확인할 수 있습니다. `stripe`를 구성 후 에는 각 `OST`마다 동등하게 분배되어 파일이 저장되는것을 확인할 수 있습니다. 오버스트라이핑 같은 경우 일반 스트라이핑으로 구성한 것 보다 빠르다는 장점이 있습니다.
 
-  * 다음은 일반 스트라이핑 구성과 오버스트라이핑을 구성하는 명령어입니다.
+다음은 일반 스트라이핑 구성과 오버스트라이핑을 구성하는 명령어입니다.
 ```console
 //Client에서 실행
-# lfs setstripe --stripe-count 4 [file or directory name] //OST가 4개일 때 4개의 스트라이프
-# lfs setstripe --overstripe-count 8 [file or directory name] //OST가 4개일 때 8개의 스트라이프
+[root@lzfs-client ~]# lfs setstripe --stripe-count 4 [file or directory name] //OST가 4개일 때 4개의 스트라이프
+[root@lzfs-client ~]# lfs setstripe --overstripe-count 8 [file or directory name] //OST가 4개일 때 8개의 스트라이프
 
 //stripe 구성 확인
-# lfs getstripe [file or directory name]
+[root@lzfs-client ~]# lfs getstripe [file or directory name]
 ```
 
-* DOM(Data-ON-MDT)
+## DOM(Data-ON-MDT)
+
+`lustre FS`는 현재 대용량 파일에 최적화되어 있습니다. 이로 인해 파일 크기가 너무 작은 단일 파일일 경우 성능이 크게 저하되는 문제가 있습니다. `DoM`은 작은 파일을 `MDT`에 저장하여 이러한 문제를 해결합니다. `DoM`을 이용해서 `MDT`에 작은 파일을 저장하였을 때 추가적으로 `OST`에 접근할 필요가 없어 작은 I/O에 대한 성능이 향상됩니다.
+
+`DoM`은 두 가지 구성요소가 있습니다. 첫 번째는 `MDT` 컴포넌트 두 번째는 `OST stripe`로 구성됩니다. 기본적으로 `DoM`의 `MDT stripe` 크기는 1M로 설정되어있습니다. 이를 변경하기 위해서는 다음과 같은 명령어를 사용합니다.
+
+```console
+// MDS 서버에서 실행
+[root@MDS ~]# lctl get_param lod.*.dom_stripesize //DoM Stripe 크기를 확인
+[root@MDS ~]# lctl get_param -P lod.*.dom_stripesize=2M //stripe 크기를 2M로 변경
+//파라미터를 config에 저장
+[root@MDS ~]# lctl conf_param <fsname>-MDT0000.lod.dom_stripesize=0
+```
+
+다음은 `DoM` 구성도와 이를 구성하는 명령어 입니다.
+
+![DoM](/assets/DoM.png)
+<center>그림 5. DoM</center>
+  
+```console
+[root@Client ~]# lfs setstripe <--component-end| -E end1> <--layout | -L> mdt [<--component-end| -E end2> [STRIPE_OPTIONS] ...] <filename>
+ex) [root@Client ~]#  lfs setstripe -E 1M -L mdt -E -1 -S 4M -c -1 /mnt/lustre/domfile // -S는 스트라이프 크기, -c는 스트라이프 개수
+
+//구성 확인
+[root@Client ~]# lfs getstripe /mnt/lustre/domfile
+test2_domfile
+  lcm_layout_gen:    2
+  lcm_mirror_count:  1
+  lcm_entry_count:   2
+    lcme_id:             1
+    lcme_mirror_id:      0
+    lcme_flags:          init
+    lcme_extent.e_start: 0
+    lcme_extent.e_end:   1048576
+      lmm_stripe_count:  0
+      lmm_stripe_size:   1048576
+      lmm_pattern:       mdt
+      lmm_layout_gen:    0
+      lmm_stripe_offset: 0
+
+    lcme_id:             2
+    lcme_mirror_id:      0
+    lcme_flags:          0
+    lcme_extent.e_start: 1048576
+    lcme_extent.e_end:   EOF
+      lmm_stripe_count:  -1
+      lmm_stripe_size:   4194304
+      lmm_pattern:       raid0
+      lmm_layout_gen:    0
+      lmm_stripe_offset: -1
+```
+
+## DNE(Distributed Namespace Environment)
+
+`lustre` version 2.4에서는 볼륨의 각 디렉터리 마다 `MDT`를 정해서 동시에 사용하는 구조 였지만, version 2.7 이 후에는 Single Directory환경에서 여러개의 Multiple MDT를 분산 형태로 사용할 수 있도록 변경되었습니다.
+
+
+참고
+---
+
+[1] https://wiki.whamcloud.com/display/PUB/Why+Use+Lustre
+[2] https://wiki.lustre.org/Main_Page
+[3] https://jaynamm.tistory.com/entry/Lustre-File-System
+[4] https://github.com/DDNStorage/lustre_manual_markdown/blob/master/03.15-Hierarchical%20Storage%20Management%20(HSM).md
+[5] https://www.sungardas.com/en-us/blog/what-is-hierarchical-storage-management/
+[6] https://jira.whamcloud.com/browse/LU-10092
+[7] https://wiki.lustre.org/images/0/04/LUG2018-Lustre_Persistent_Client_Cache-Xi.pdf
+[8] https://wiki.lustre.org/images/b/b3/LUG2019-Lustre_Overstriping_Shared_Write_Performance-Farrell.pdf
+[9] https://jira.whamcloud.com/browse/LUDOC-385
+[10] https://wiki.lustre.org/images/c/c5/LUG2018-Small_File_IO_Perf_DataOnMDT-Gmitter.pdf
