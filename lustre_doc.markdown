@@ -163,19 +163,27 @@ test2_domfile
 
 ## DNE(Distributed Namespace Environment)
 
-`lustre` version 2.4에서는 볼륨의 각 디렉터리 마다 `MDT`를 정해서 동시에 사용하는 구조 였지만, version 2.7 이 후에는 Single Directory환경에서 여러개의 Multiple MDT를 분산 형태로 사용할 수 있도록 변경되었습니다.
+<내용 정리 더 필요할듯>
+`HPC` 시스템은 일상적으로 수많은 클라이언트로 `Lustre`를 구성합니다. 이렇듯 클라이언트가 확장되었을 때 `MDS` 서버도 증가할 것이고 `MDT`도 추가되어야합니다. `DNE`는 이러한 문제를 해결하기위해 제공되고 있습니다. 
+
+`lustre` version 2.4에서는 볼륨의 각 디렉터리 마다 `MDT`를 정해서 동시에 사용하는 구조 였지만, version 2.7 이 후에는 Single Directory환경에서 여러개의 Multiple MDT를 분산 형태로 사용할 수 있도록 변경되었습니다. 
+
+`DNE`는 Remote directories 방식과 Striped directories 방식으로 나눌 수 있습니다. 먼저 Remote directories는 관리자 전체 파일 시스템 네임스페이스의 개별 하위 트리를 특정 `MDT`에 할당할 수 있는 방법입니다. 두 분째 Striped directories 방식은 여러 서버와 `MDT`에서 메타데이터 작업의 부하를 분산하고 디렉터리 구조가 여러 `MDT`에 분할되어 사용됩니다.
+<내용 정리 더 필요할듯>
+
 
 
 참고
 ---
 
-[1] https://wiki.whamcloud.com/display/PUB/Why+Use+Lustre
-[2] https://wiki.lustre.org/Main_Page
-[3] https://jaynamm.tistory.com/entry/Lustre-File-System
-[4] https://github.com/DDNStorage/lustre_manual_markdown/blob/master/03.15-Hierarchical%20Storage%20Management%20(HSM).md
-[5] https://www.sungardas.com/en-us/blog/what-is-hierarchical-storage-management/
-[6] https://jira.whamcloud.com/browse/LU-10092
-[7] https://wiki.lustre.org/images/0/04/LUG2018-Lustre_Persistent_Client_Cache-Xi.pdf
-[8] https://wiki.lustre.org/images/b/b3/LUG2019-Lustre_Overstriping_Shared_Write_Performance-Farrell.pdf
-[9] https://jira.whamcloud.com/browse/LUDOC-385
-[10] https://wiki.lustre.org/images/c/c5/LUG2018-Small_File_IO_Perf_DataOnMDT-Gmitter.pdf
+* https://wiki.whamcloud.com/display/PUB/Why+Use+Lustre
+* https://wiki.lustre.org/Main_Page
+* https://jaynamm.tistory.com/entry/Lustre-File-System
+* https://github.com/DDNStorage/lustre_manual_markdown/blob/master/03.15-Hierarchical%20Storage%20Management%20(HSM).md
+* https://www.sungardas.com/en-us/blog/what-is-hierarchical-storage-management/
+* https://jira.whamcloud.com/browse/LU-10092
+* https://wiki.lustre.org/images/0/04/LUG2018-Lustre_Persistent_Client_Cache-Xi.pdf
+* https://wiki.lustre.org/images/b/b3/LUG2019-Lustre_Overstriping_Shared_Write_Performance-Farrell.pdf
+* https://jira.whamcloud.com/browse/LUDOC-385
+* https://wiki.lustre.org/images/c/c5/LUG2018-Small_File_IO_Perf_DataOnMDT-Gmitter.pdf
+
