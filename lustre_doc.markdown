@@ -92,7 +92,7 @@ High Performance Computing(HPC) 클러스터는 대규모 애플리케이션에 
 
 ## OverStriping
 
-![OVERSTRIPING](/assets/overstriping.PNG)
+![Overstriping Example](/assets/overstriping.PNG)
 <center>그림 4. overstriping</center>
 
 오버스트라이핑(overstriping)은 기존에 `OST`당 하나였던 `stripe`를 여러개의 `stripe`를 가질 수 있게 만든것 입니다. 기본적으로 스트라이프의 크기는 1M(1048576byte)로 되어있습니다.
