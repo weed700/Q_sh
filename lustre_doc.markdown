@@ -92,7 +92,7 @@ High Performance Computing(HPC) 클러스터는 대규모 애플리케이션에 
 
 ## OverStriping
 
-![OVERSTRIPING](/assets/overstriping.png)
+![OVERSTRIPING](/assets/overstriping.PNG)
 <center>그림 4. overstriping</center>
 
 오버스트라이핑(overstriping)은 기존에 `OST`당 하나였던 `stripe`를 여러개의 `stripe`를 가질 수 있게 만든것 입니다. 기본적으로 스트라이프의 크기는 1M(1048576byte)로 되어있습니다.
@@ -108,6 +108,10 @@ High Performance Computing(HPC) 클러스터는 대규모 애플리케이션에 
 //stripe 구성 확인
 [root@lzfs-client ~]# lfs getstripe [file or directory name]
 ```
+* Overstriping 이점
+
+![OVERSTRIPING 이점](/assets/overstriping_이점.PNG)
+<center>그림 5. overstriping 이점</center>
 
 ## DOM(Data-ON-MDT)
 
@@ -125,8 +129,8 @@ High Performance Computing(HPC) 클러스터는 대규모 애플리케이션에 
 
 다음은 `DoM` 구성도와 이를 구성하는 명령어 입니다.
 
-![DoM](/assets/DoM.png)
-<center>그림 5. DoM</center>
+![DoM](/assets/DoM.PNG)
+<center>그림 6. DoM</center>
   
 ```console
 [root@Client ~]# lfs setstripe <--component-end| -E end1> <--layout | -L> mdt [<--component-end| -E end2> [STRIPE_OPTIONS] ...] <filename>
@@ -163,8 +167,8 @@ test2_domfile
 
 ## DNE(Distributed Namespace Environment)
 
-![DNE](/assets/DNE.png)
-<center>그림 6. DNE</center>
+![DNE](/assets/DNE.PNG)
+<center>그림 7. DNE</center>
 
 `HPC` 시스템은 일상적으로 수많은 클라이언트로 `Lustre`를 구성합니다. 이렇듯 클라이언트가 확장되었을 때 `MDT`도 추가되어야합니다. `DNE`는 `MDT`가 추가되었을 때 분배하는 방법에대해 말하고 있습니다. 
 
