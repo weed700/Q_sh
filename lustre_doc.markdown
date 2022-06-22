@@ -78,7 +78,7 @@ High Performance Computing(HPC) 클러스터는 대규모 애플리케이션에 
 
 ## PCC(Persistent Client Cache)
 
-![pcc](/assets/PCC.png)
+![pcc](/assets/PCC_Architecture.png)
 <center>그림 3. Persistent Client Cache</center>
 
 `PCC`는 러스터 클라이언트 측에서 로컬 캐시 그룹을 제공하는 프레임워크입니다. 각 클라이언트는 `OST`대신 로컬 저장 장치를 자체 캐시로 사용합니다. 로컬 파일 시스템은 로컬 저장장치 안에 있는 캐시 데이터를 관리하는데 사용됩니다. 캐시된 I/O의 경우 로컬 파일 시스템으로 전달되어 처리되고 일반 I/O는 OST로 전달됩니다.
