@@ -21,7 +21,7 @@ High Performance Computing(HPC) 클러스터는 대규모 애플리케이션에 
 러스터는 `Linux` 기반 운영체제에서 실행되며 `클라이언트(Client)-서버(Server)` 네트워크 아키텍처를 사용합니다.
 
 # Lustre FS Architecture
-![Alt text](/assets/Lustre_architecture.png)
+![Lustre FS Architecture](/assets/Lustre_architecture.png)
 <center>그림 1. Lustre Architecture</center>
 
 * MGS(Management Server)
@@ -163,14 +163,22 @@ test2_domfile
 
 ## DNE(Distributed Namespace Environment)
 
-<내용 정리 더 필요할듯>
-`HPC` 시스템은 일상적으로 수많은 클라이언트로 `Lustre`를 구성합니다. 이렇듯 클라이언트가 확장되었을 때 `MDS` 서버도 증가할 것이고 `MDT`도 추가되어야합니다. `DNE`는 이러한 문제를 해결하기위해 제공되고 있습니다. 
+![DNE](/assets/DNE.png)
+<center>그림 6. DNE</center>
 
-`lustre` version 2.4에서는 볼륨의 각 디렉터리 마다 `MDT`를 정해서 동시에 사용하는 구조 였지만, version 2.7 이 후에는 Single Directory환경에서 여러개의 Multiple MDT를 분산 형태로 사용할 수 있도록 변경되었습니다. 
+`HPC` 시스템은 일상적으로 수많은 클라이언트로 `Lustre`를 구성합니다. 이렇듯 클라이언트가 확장되었을 때 `MDT`도 추가되어야합니다. `DNE`는 `MDT`가 추가되었을 때 분배하는 방법에대해 말하고 있습니다. 
 
-`DNE`는 Remote directories 방식과 Striped directories 방식으로 나눌 수 있습니다. 먼저 Remote directories는 관리자 전체 파일 시스템 네임스페이스의 개별 하위 트리를 특정 `MDT`에 할당할 수 있는 방법입니다. 두 분째 Striped directories 방식은 여러 서버와 `MDT`에서 메타데이터 작업의 부하를 분산하고 디렉터리 구조가 여러 `MDT`에 분할되어 사용됩니다.
-<내용 정리 더 필요할듯>
+`lustre` version 2.4에서는 볼륨의 각 디렉터리 마다 `MDT`를 정해서 동시에 사용하는 구조 였지만, version 2.7 이 후에는 Single Directory환경에서 여러개의 Multiple MDT를 분산 형태로 사용할 수 있도록 변경되었습니다. 이를 `Lustre`에서는 단계별로 표현을 하고 있습니다. 1단계 Remote directories에서 `Lustre` 하위 디렉터리는 여러 `MDT`에 배포됩니다. 하위 디렉토리 배포는 관리자가 `Lustre`관련 `mkdir` 명령을 사용하여 정의합니다. 2단계 striped directories는 여러 `MDT`로 스트라이프된 디렉터리를 통해 `MDT`로 분배되어 저장됩니다. 이렇게 하면 단일 디렉터리 내에서 메타데이터 처리량을 확장할 수 있습니다.
 
+`DNE` 시스템에서 `MDT`는 시간이 지남에 따라 불균형해질 수 있으며 사용자는 `MDT`를 추가/제거할 수 있습니다. `DNE`에서 restriping은 로드를 한 `MDT`에서 다른 `MDT`로 이동할때 사용됩니다. 
+
+* 다음은 Striped Directory Migration 명령어입니다.
+
+```console
+[root@Client ~]# lfs migrate -m
+ex) 아래 명령어는/testfs/largedir MDT0000에 있는 내용을 MDT0001 및 MDT0003으로 마이그레이션 하는 방법입니다.
+[root@Client ~]# lfs migrate -m 1,3 /tetstfs/largedir
+```
 
 
 참고
