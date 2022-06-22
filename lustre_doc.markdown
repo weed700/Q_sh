@@ -24,6 +24,8 @@ High Performance Computing(HPC) 클러스터는 대규모 애플리케이션에 
 ![Lustre FS Architecture](/assets/Lustre_Architecture.PNG)
 <center>그림 1. Lustre Architecture</center>
 
+&nbsp;
+
 * MGS(Management Server)
   * 모든 러스터 파일 시스템에 대한 구성 정보를 클러스터에 저장하고 이 정보를 다른 `Lustre` 호스트에 제공합니다.
 
@@ -63,6 +65,8 @@ High Performance Computing(HPC) 클러스터는 대규모 애플리케이션에 
 ![HSM](/assets/HSM_Architecture.png)
 <center>그림 2. HSM Architecture</center>
 
+&nbsp;
+
   * 러스터 파일 시스템을 하나 이상의 외부 스토리지 시스템에 연결할 수 있습니다.
   * 파일을 읽기, 쓰기, 수정과 같이 파일에 접근하게되면 `HSM` 스토리지에서 러스터 파일 시스템으로 파일을 다시 가져옵니다.
   * 파일을 `HSM` 스토리지에 복사하는 프로세스를 `아카이브(Archive)`라고 하고 아카이브가 완료되면 러스터 파일 시스템에 존재하는 데이터를 삭제할 수 있습니다. 이것을 `Release`라고 말합니다. `HSM`스토리지에서 러스터 파일 시스템으로 데이터를 반환하는 프로세스를 `restore`라고 합니다. 여기서 말하는 restore와 archive는 `HSM Agent`라는 데몬이 필요합니다.
@@ -81,6 +85,8 @@ High Performance Computing(HPC) 클러스터는 대규모 애플리케이션에 
 ![pcc](/assets/PCC_Architecture.png)
 <center>그림 3. Persistent Client Cache</center>
 
+&nbsp;
+
 `PCC`는 러스터 클라이언트 측에서 로컬 캐시 그룹을 제공하는 프레임워크입니다. 각 클라이언트는 `OST`대신 로컬 저장 장치를 자체 캐시로 사용합니다. 로컬 파일 시스템은 로컬 저장장치 안에 있는 캐시 데이터를 관리하는데 사용됩니다. 캐시된 I/O의 경우 로컬 파일 시스템으로 전달되어 처리되고 일반 I/O는 OST로 전달됩니다.
 
 `PCC`는 데이터 동기화를 위해 `HSM` 기술을 사용합니다. `HSM copytool`을 사용하여 로컬 캐시에서 `OST`로 파일을 복원합니다. 각 `PCC`에는 고유한 아카이브 번호로 실행되는 copytool 인스턴스가 있고 다른 러스터 클라이언트에서 접근하게되면 데이터 동기화가 진행됩니다. `PCC`가 있는 클라이언트가 오프라인될 시 캐시된 데이터는 일시적으로 다른 클라이언트에서 접근할 수 없게 됩니다. 이후 `PCC`클라이언트가 재부팅되고 `copytool`이 다시 동작하면 캐시 데이터에 다시 접근할 수 있습니다.
@@ -93,7 +99,9 @@ High Performance Computing(HPC) 클러스터는 대규모 애플리케이션에 
 ## OverStriping
 
 ![Overstriping Example](/assets/overstriping.PNG)
-<center>그림 4. overstriping</center>
+<center>그림 4. Overstriping Example</center>
+
+&nbsp;
 
 오버스트라이핑(overstriping)은 기존에 `OST`당 하나였던 `stripe`를 여러개의 `stripe`를 가질 수 있게 만든것 입니다. 기본적으로 스트라이프의 크기는 1M(1048576byte)로 되어있습니다.
 
@@ -110,10 +118,10 @@ High Performance Computing(HPC) 클러스터는 대규모 애플리케이션에 
 ```
 * Overstriping 이점
 
-![OVERSTRIPING 이점](/assets/overstriping_이점.PNG)
-<center>그림 5. overstriping 이점</center>
+![Overstriping Performance](/assets/overstriping_이점.PNG)
+<center>그림 5. overstriping Performance</center>
 
-## DOM(Data-ON-MDT)
+## DOM(Data-On-MDT)
 
 `lustre FS`는 현재 대용량 파일에 최적화되어 있습니다. 이로 인해 파일 크기가 너무 작은 단일 파일일 경우 성능이 크게 저하되는 문제가 있습니다. `DoM`은 작은 파일을 `MDT`에 저장하여 이러한 문제를 해결합니다. `DoM`을 이용해서 `MDT`에 작은 파일을 저장하였을 때 추가적으로 `OST`에 접근할 필요가 없어 작은 I/O에 대한 성능이 향상됩니다.
 
@@ -130,7 +138,9 @@ High Performance Computing(HPC) 클러스터는 대규모 애플리케이션에 
 다음은 `DoM` 구성도와 이를 구성하는 명령어 입니다.
 
 ![DoM](/assets/DoM.PNG)
-<center>그림 6. DoM</center>
+<center>그림 6. Data-On-MDT</center>
+
+&nbsp;
   
 ```console
 [root@Client ~]# lfs setstripe <--component-end| -E end1> <--layout | -L> mdt [<--component-end| -E end2> [STRIPE_OPTIONS] ...] <filename>
@@ -168,7 +178,9 @@ test2_domfile
 ## DNE(Distributed Namespace Environment)
 
 ![DNE](/assets/DNE.PNG)
-<center>그림 7. DNE</center>
+<center>그림 7. Distributed Namespace Environment</center>
+
+&nbsp;
 
 `HPC` 시스템은 일상적으로 수많은 클라이언트로 `Lustre`를 구성합니다. 이렇듯 클라이언트가 확장되었을 때 `MDT`도 추가되어야합니다. `DNE`는 `MDT`가 추가되었을 때 분배하는 방법에대해 말하고 있습니다. 
 
